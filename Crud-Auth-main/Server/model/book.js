@@ -10,6 +10,7 @@ let bookModel = mongoose.Schema({
     Price: Number
 },
 {
+
     collection:"Bio_books"
 });
 module.exports =mongoose.model('Book',bookModel);
