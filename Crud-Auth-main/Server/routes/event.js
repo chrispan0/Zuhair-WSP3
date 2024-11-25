@@ -26,7 +26,7 @@ try{
     catch(err){
         console.error(err);
         res.render('Event/list',{
-            error:'Error on the server'
+            error:'Error fetching events on the server'
         })
     }
     });
@@ -35,7 +35,7 @@ router.get('/add',async(req,res,next)=>{
     try{
         res.render('Event/add',{
             title: 'Add Event',
-            displayName: req.user?req.user.displayName:'' 
+            displayName: req.user ? req.user.displayName:'' 
         })
 
     }
@@ -43,7 +43,7 @@ router.get('/add',async(req,res,next)=>{
     {
         console.error(err);
         res.render('Event/list',{
-            error:'Error on the server'
+            error:'Error loading the add event page'
         })
     }
 });
@@ -61,14 +61,14 @@ router.post('/add',async(req,res,next)=>{
         });
         
         Event.create(newEvent).then(()=>{
-            res.redirect('/eventslist');
+            res.redirect('/events');
         })
     }
     catch(err)
         {
             console.error(err);
-            res.render('/eventslist',{
-                error:'Error on the server'
+            res.render('Event/list',{
+                error:'Error adding the event'
             })
 
         }
@@ -96,35 +96,35 @@ router.post('/edit/:id',async(req,res,next)=>{
     try{
         let id=req.params.id;
         let updatedEvent = Event({
-            "_id":id,
-            "Name":req.body.Name,
-            "Author":req.body.Author,
-            "Published":req.body.Published,
-            "Description":req.body.Description,
-            "Price":req.body.Price
+            "name": req.body.name,
+            "date": req.body.date,
+            "time": req.body.time,
+            "location": req.body.location,
+            "description": req.body.description
         })
         Event.findByIdAndUpdate (id,updatedEvent).then(()=>{
-            res.redirect('/eventslist')
+            res.redirect('/events')
         })
     }
     catch(err){
         console.error(err);
-        res.render('/eventslist',{
-            error:'Error on the server'
+        res.render('Event/list',{
+            error:'Error updating the event'
         })
     }
 });
+// Delete event
 router.get('/delete/:id',async(req,res,next)=>{
     try{
         let id=req.params.id;
         Event.deleteOne({_id:id}).then(()=>{
-            res.redirect('/eventslist')
+            res.redirect('/events')
         })
     }
     catch(error){
         console.error(err);
-        res.render('/eventslist',{
-            error:'Error on the server'
+        res.render('/Event/list',{
+            error:'Error deleting the event'
         })
     }
 });

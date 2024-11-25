@@ -2,7 +2,7 @@
 
 const mongoose = require("mongoose");
 
-const eventScheme = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
     name: {type: String, required: true},
     date: {type: Date, required: true},
     time: {type: String},
