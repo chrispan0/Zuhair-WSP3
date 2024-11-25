@@ -15,7 +15,7 @@ let User = userModel.User;
 
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
-let bookRouter = require('../routes/event');
+let eventRouter = require('../routes/event');
 
 
 // view engine setup
@@ -79,7 +79,7 @@ app.use(express.static(path.join(__dirname, '../../node_modules')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/bookslist',bookRouter);
+app.use('/events',eventRouter);
 // /project --> projectrouter
 // /contactus --> contactus
 
