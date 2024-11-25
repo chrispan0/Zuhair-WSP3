@@ -74,7 +74,7 @@ router.post('/add',async(req,res,next)=>{
 
         }
     })
-
+// Edit event form
 router.get('/edit/:id',async(req,res,next)=>{
     try{
         const id=req.params.id;
@@ -83,7 +83,7 @@ router.get('/edit/:id',async(req,res,next)=>{
             {
                 title:'Edit Event',
                 displayName: req.user?req.user.displayName:'',
-                Event:eventToEdit
+                event:eventToEdit
             }
         )
     }
@@ -96,13 +96,13 @@ router.get('/edit/:id',async(req,res,next)=>{
 router.post('/edit/:id',async(req,res,next)=>{
     try{
         let id=req.params.id;
-        let updatedEvent = Event({
+        let updatedEvent = {
             "name": req.body.name,
             "date": req.body.date,
             "time": req.body.time,
             "location": req.body.location,
             "description": req.body.description
-        })
+        }
         Event.findByIdAndUpdate (id,updatedEvent).then(()=>{
             res.redirect('/events')
         })
