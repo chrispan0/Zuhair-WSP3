@@ -1,0 +1,26 @@
+<%- include ../Partials/header.ejs%>
+<%- include ../Partials/main_nav.ejs%>
+<!--Content for Add Page-->
+<form action="/events/add" method="POST">
+  <label for="name">Event Name:</label>
+  <input type="text" name="name" required>
+  
+  <label for="date">Date:</label>
+  <input type="date" name="date" required>
+
+  <label for="time">Time:</label>
+  <input type="time" name="time">
+
+  <label for="location">Location:</label>
+  <input type="text" name="location">
+
+  <label for="description">Description:</label>
+  <textarea name="description"></textarea>
+
+  <button type="submit">Add Event</button>
+  
+            </form>
+        </div>
+    </div>
+</div>
+<%- include ../Partials/footer.ejs%>

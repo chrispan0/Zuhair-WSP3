@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 let mongoose=require('mongoose');
 //Telling my router that i have this model
-let Book = require("../model/book")
-const book=require("../model/book")
-let bookController = require('../controllers/book.js')
+let event = require("../model/event")
+const event=require("../model/event")
+let eventController = require('../Controllers/event.js')
 function requireAuth(req,res,next)
 {
     if (!req.isAuthenticated())
@@ -12,21 +12,21 @@ function requireAuth(req,res,next)
         return res.redirect('/login');
     }
     next();
-    
+
 }
  
 
 router.get('/',async(req,res,next)=>{
 try{
-    const BookList= await Book.find();
-    res.render('Book/list', {
-        title:'Books',
+    const eventList= await event.find();
+    res.render('Event/list', {
+        title:'Events',
         displayName: req.user?req.user.displayName:'',
-        BookList:BookList
+        EventList:EventList
     })}
     catch(err){
         console.error(err);
-        res.render('Book/list',{
+        res.render('Event/list',{
             error:'Error on the server'
         })
     }
@@ -34,8 +34,8 @@ try{
 
 router.get('/add',async(req,res,next)=>{
     try{
-        res.render('Book/add',{
-            title: 'Add Book',
+        res.render('Event/add',{
+            title: 'Add Event',
             displayName: req.user?req.user.displayName:'' 
         })
 
@@ -43,7 +43,7 @@ router.get('/add',async(req,res,next)=>{
     catch(err)
     {
         console.error(err);
-        res.render('Book/list',{
+        res.render('Event/list',{
             error:'Error on the server'
         })
     }
@@ -53,21 +53,21 @@ router.get('/add',async(req,res,next)=>{
 
 router.post('/add',async(req,res,next)=>{
     try{
-        let newBook= Book ({
+        let newEvent= Event ({
             "Name":req.body.Name,
             "Author":req.body.Author,
             "Published":req.body.Published,
             "Description":req.body.Description,
             "Price":req.body.Price
         });
-        Book.create(newBook).then(()=>{
-            res.redirect('/bookslist');
+        Event.create(newEvent).then(()=>{
+            res.redirect('/eventslist');
         })
     }
     catch(err)
         {
             console.error(err);
-            res.render('/bookslist',{
+            res.render('/eventslist',{
                 error:'Error on the server'
             })
 
@@ -77,12 +77,12 @@ router.post('/add',async(req,res,next)=>{
 router.get('/edit/:id',async(req,res,next)=>{
     try{
         const id=req.params.id;
-        const bookToEdit=await Book.findById(id);
-        res.render('Book/edit',
+        const eventToEdit=await Event.findById(id);
+        res.render('Event/edit',
             {
-                title:'Edit Book',
+                title:'Edit Event',
                 displayName: req.user?req.user.displayName:'',
-                Book:bookToEdit
+                Event:eventToEdit
             }
         )
     }
@@ -95,7 +95,7 @@ router.get('/edit/:id',async(req,res,next)=>{
 router.post('/edit/:id',async(req,res,next)=>{
     try{
         let id=req.params.id;
-        let updatedBook = Book({
+        let updatedEvent = Event({
             "_id":id,
             "Name":req.body.Name,
             "Author":req.body.Author,
@@ -103,13 +103,13 @@ router.post('/edit/:id',async(req,res,next)=>{
             "Description":req.body.Description,
             "Price":req.body.Price
         })
-        Book.findByIdAndUpdate (id,updatedBook).then(()=>{
-            res.redirect('/bookslist')
+        Event.findByIdAndUpdate (id,updatedEvent).then(()=>{
+            res.redirect('/eventslist')
         })
     }
     catch(err){
         console.error(err);
-        res.render('/bookslist',{
+        res.render('/eventslist',{
             error:'Error on the server'
         })
     }
@@ -117,13 +117,13 @@ router.post('/edit/:id',async(req,res,next)=>{
 router.get('/delete/:id',async(req,res,next)=>{
     try{
         let id=req.params.id;
-        Book.deleteOne({_id:id}).then(()=>{
-            res.redirect('/bookslist')
+        Event.deleteOne({_id:id}).then(()=>{
+            res.redirect('/eventslist')
         })
     }
     catch(error){
         console.error(err);
-        res.render('/bookslist',{
+        res.render('/eventslist',{
             error:'Error on the server'
         })
     }

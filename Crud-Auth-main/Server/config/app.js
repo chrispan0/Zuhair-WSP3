@@ -15,7 +15,7 @@ let User = userModel.User;
 
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
-let bookRouter = require('../routes/book');
+let bookRouter = require('../routes/event');
 
 
 // view engine setup

@@ -8,6 +8,6 @@ const eventScheme = new mongoose.Schema({
     time: {type: String},
     location: {type: String,
     description: {type: String},
-
+    }
 });
 module.exports =mongoose.model('Event',eventSchema);
