@@ -1,10 +1,11 @@
-<%- include ../Partials/header.ejs%>
-<%- include ../Partials/main_nav.ejs%>
+<%- include ../Partials/header.ejs %>
+<%- include ../Partials/main_nav.ejs %>
+
 <h1>Event List</h1>
 <ul>
   <% events.forEach(event => { %>
     <li>
-      <strong><%= event.name %></strong> - <%= event.date.toDateString() %>
+      <strong><%= event.name %></strong> - <%= new Date(event.date).toDateString() %>
       <a href="/events/edit/<%= event._id %>">Edit</a>
       <a href="/events/delete/<%= event._id %>">Delete</a>
     </li>
@@ -12,5 +13,4 @@
 </ul>
 <a href="/events/add">Add a New Event</a>
 
-
-<%- include ../Partials/footer.ejs%>
+<%- include ../Partials/footer.ejs %>
