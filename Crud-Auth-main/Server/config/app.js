@@ -3,13 +3,9 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-
 let app = express();
-
 let cors = require('cors')
-
 // Create user model instance
-
 let userModel = require('../model/User');
 let User = userModel.User;
 
