@@ -2,15 +2,12 @@
 
 const mongoose = require("mongoose");
 
-let bookModel = mongoose.Schema({
-    Name: String,
-    Author: String,
-    Published: String,
-    Description: String,
-    Price: Number
-},
-{
+const eventScheme = new mongoose.Schema({
+    name: {type: String, required: true},
+    date: {type: Date, required: true},
+    time: {type: String},
+    location: {type: String,
+    description: {type: String},
 
-    collection:"Bio_books"
 });
-module.exports =mongoose.model('Book',bookModel);
+module.exports =mongoose.model('Event',eventSchema);
