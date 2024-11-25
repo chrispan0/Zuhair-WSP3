@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 let mongoose=require('mongoose');
 //Telling my router that i have this model
-let event = require("../model/event")
-const event=require("../model/event")
+let event = require("../model/event.js")
 let eventController = require('../Controllers/event.js')
 function requireAuth(req,res,next)
 {
@@ -22,7 +21,7 @@ try{
     res.render('Event/list', {
         title:'Events',
         displayName: req.user?req.user.displayName:'',
-        EventList:EventList
+        EventList:eventList
     })}
     catch(err){
         console.error(err);
@@ -53,13 +52,14 @@ router.get('/add',async(req,res,next)=>{
 
 router.post('/add',async(req,res,next)=>{
     try{
-        let newEvent= Event ({
-            "Name":req.body.Name,
-            "Author":req.body.Author,
-            "Published":req.body.Published,
-            "Description":req.body.Description,
-            "Price":req.body.Price
+        let newEvent = new Event({
+            "name": req.body.name,
+            "date": req.body.date,
+            "time": req.body.time,
+            "location": req.body.location,
+            "description": req.body.description
         });
+        
         Event.create(newEvent).then(()=>{
             res.redirect('/eventslist');
         })
