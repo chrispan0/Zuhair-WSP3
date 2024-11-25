@@ -17,11 +17,11 @@ function requireAuth(req,res,next)
 
 router.get('/',async(req,res,next)=>{
 try{
-    const events= await Event.find();
+    const events= await Event.find(); //Fetch all events
     res.render('Event/list', {
         title:'Event List',
         displayName: req.user?req.user.displayName:'',
-        events: events
+        events: events // Passing the events to the view
 
     })}
     catch(err){
@@ -61,15 +61,15 @@ router.post('/add',async(req,res,next)=>{
             "description": req.body.description
         });
         
-        Event.create(newEvent).then(()=>{
-            res.redirect('/events');
-        })
-    }
-    catch(err)
-        {
-            console.error(err);
-            res.render('Event/list',{
-                error:'Error adding the event'
+            Event.create(newEvent).then(()=>{
+                res.redirect('/events');
+            })
+        }
+        catch(err)
+            {
+                console.error(err);
+                res.render('Event/list',{
+                    error:'Error adding the event'
             })
 
         }

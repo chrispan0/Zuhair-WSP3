@@ -1,1 +1,1 @@
-module.exports={"URI":"mongodb+srv://zuhairuddinmohammed:d5cPO0FeBXtgzNEx@cluster0.6lrpl.mongodb.net/"}
+module.exports={"URI":"mongodb+srv://zuhairuddinmohammed:d5cPO0FeBXtgzNEx@cluster0.6lrpl.mongodb.net/event"}

@@ -3,23 +3,31 @@
 
 <div class="container">
     <h1>Event List</h1>
-    <div class="row">
-        <% events.forEach(event => { %>
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title"><%= event.name %></h5>
-                    <p class="card-text"><strong>Date:</strong> <%= new Date(event.date).toDateString() %></p>
-                    <p class="card-text"><strong>Location:</strong> <%= event.location %></p>
-                    <p class="card-text"><%= event.description %></p>
-                    <a href="/events/edit/<%= event._id %>" class="btn btn-primary">Edit</a>
-                    <button onclick="confirmDelete('<%= event._id %>')" class="btn btn-danger">Delete</button>
+    <% if (events && events.length > 0) { %>
+        <div class="row">
+            <% events.forEach(event => { %>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= event.name %></h5>
+                            <p><strong>Date:</strong> <%= new Date(event.date).toDateString() %></p>
+                            <p><strong>Location:</strong> <%= event.location %></p>
+                            <p><%= event.description %></p>
+                            <a href="/events/edit/<%= event._id %>" class="btn btn-primary">Edit</a>
+                            <a href="/events/delete/<%= event._id %>" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            <% }); %>
         </div>
-        <% }); %>
-    </div>
+    <% } else { %>
+        <p>No events found. Start by adding one below:</p>
+    <% } %>
+
+    <!-- Add Event Button -->
+    <a href="/events/add" class="btn btn-success">Add Event</a>
 </div>
+
 
 <script>
     function confirmDelete(id) {
