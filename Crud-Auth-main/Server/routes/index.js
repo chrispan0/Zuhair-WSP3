@@ -17,27 +17,11 @@ router.get('/home', function(req, res, next) {
     title: 'Home',
     displayName: req.user ? req.user.displayName:'' });
 });
-/* GET About page. */
-router.get('/aboutus', function(req, res, next) {
-  res.render('index', { 
-    title: 'About us',
-    displayName: req.user ? req.user.displayName:'' });
-});
-/* GET products page. */
-router.get('/products', function(req, res, next) {
-  res.render('index', { title: 'Products',
-    displayName: req.user ? req.user.displayName:''
-   });
-});
-/* GET service page. */
-router.get('/service', function(req, res, next) {
-  res.render('index', { title: 'Service',
-    displayName: req.user ? req.user.displayName:''
-   });
-});
+
+
 /* GET contactus page. */
 router.get('/contactus', function(req, res, next) {
-  res.render('index', { title: 'Contact Us',
+  res.render('contactus', { title: 'Contact Us',
     displayName: req.user ? req.user.displayName:''
    });
 });
